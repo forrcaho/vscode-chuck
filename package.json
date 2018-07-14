@@ -1,0 +1,39 @@
+{
+    "name": "chuck",
+    "displayName": "ChucK",
+    "description": "Syntax highlighting for the ChucK langauge (http://chuck.cs.princeton.edu/)",
+    "version": "0.0.1",
+    "publisher": "forrcaho",
+    "author": {
+        "name": "Forrest Cahoon"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/forrcaho/vscode-chuck",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/forrcaho/vscode-chuck"
+    },
+    "bugs": {
+        "url": "https://github.com/forrcaho/vscode-chuck/issues"
+    },
+    "icon": "chuck.png",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "chuck",
+            "aliases": ["ChucK", "chuck"],
+            "extensions": [".ck"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "chuck",
+            "scopeName": "source.chuck",
+            "path": "./syntaxes/chuck.tmLanguage.json"
+        }]
+    }
+}
