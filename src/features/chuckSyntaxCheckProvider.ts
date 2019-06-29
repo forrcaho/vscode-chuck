@@ -20,12 +20,14 @@ export default class ChuckSyntaxCheckProvider {
         if (this.document.languageId !== 'chuck') {
             return;
         }
-
-        let diagnostics : vscode.Diagnostic[] = [];
+        this.diagnosticCollection.clear(); // clear any previous errors before re-checking
+        let diagnostics: vscode.Diagnostic[] = [];
         let errBuf = '';
 
-        let command = '/usr/local/bin/chuck-pulse'; // get from config
-        let args = ['--syntax-check-only', textDocument.fileName];
+        let config = vscode.workspace.getConfiguration("chuck");
+        let command = config.get("executable", "chuck");
+        let args: string[] = config.get("syntaxCheckArgs", []);
+        args.push(textDocument.fileName);
         let options = vscode.workspace.rootPath ? { cwd: vscode.workspace.rootPath } : undefined;
 
         console.log('About to spawn child process');

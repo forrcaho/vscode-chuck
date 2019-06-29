@@ -28,6 +28,33 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
+        "commands":[],
+        "configuration": {
+            "type": "object",
+            "title": "ChucK",
+            "properties": {
+                "chuck.executable": {
+                    "type": "string",
+                    "default" : "chuck",
+                    "description": "The chuck executable"
+                },
+                "chuck.enableSyntaxCheck": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Boolean to enable syntax check."
+                },
+                "chuck.syntaxCheckArgs": {
+                    "type": "array",
+                    "default": [ "--syntax" ],
+                    "description": "Arguments to chuck when used for syntax checking. An array of strings, each element an argument including the leading dash."
+                },
+                "chuck.playArgs": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Arguments to chuck when used for playing the current file. An array of strings, each element an argument including the leading dash."
+                }
+            }
+        },
         "languages": [
             {
                 "id": "chuck",
