@@ -20,26 +20,24 @@ export default class ChuckSyntaxCheckProvider {
         if (this.document.languageId !== 'chuck') {
             return;
         }
-        this.diagnosticCollection.clear(); // clear any previous errors before re-checking
         let diagnostics: vscode.Diagnostic[] = [];
         let errBuf = '';
 
         let config = vscode.workspace.getConfiguration("chuck");
         let command = config.get("executable", "chuck");
-        let args: string[] = config.get("syntaxCheckArgs", []);
+        // We need to clone the args array because if we don't, when we push the filename on, it
+        // will actually go into the config in memory, and be in the args of our next syntax check.
+        let args: string[] = [...config.get("syntaxCheckArgs", [])];
         args.push(textDocument.fileName);
         let options = vscode.workspace.rootPath ? { cwd: vscode.workspace.rootPath } : undefined;
 
-        console.log('About to spawn child process');
         let childProcess = cp.spawn(command, args, options);
         if (childProcess.pid) {
             childProcess.stderr.on('data', (data: Buffer) => {
-                console.log("Read from child stderr: " + data);
                 errBuf += data;
             });
 
             childProcess.stderr.on('end', () => {
-                console.log("Caught stderr end event");
                 let diagnostic : vscode.Diagnostic | undefined;
                 for (let errLine of errBuf.split(/\r?\n/)) {
                     diagnostic = this.parseLine(errLine);
@@ -53,12 +51,9 @@ export default class ChuckSyntaxCheckProvider {
     }
 
     private parseLine(errLine: string) : vscode.Diagnostic | undefined {
-        console.log("Parsing line: " + errLine);
         let match = this.chuckEMErrorRegex.exec(errLine);
         if (match) {
-            console.log("Matched first regex");
             let fileName = match[1];
-            console.log("fileName: " + fileName + " basename: " + path.basename(this.document.uri.fsPath) );
             if (path.basename(this.document.uri.fsPath) !== fileName) {
                 console.log("not this file");
                 return;
@@ -66,7 +61,6 @@ export default class ChuckSyntaxCheckProvider {
             let line = +match[2] - 1;
             let char = +match[3] - 1;
             let message = match[4];
-            console.log("Making diagnostic: line = " + line + " char = " + char + " message = " + message);
             let range = new vscode.Range(new vscode.Position(line, char), new vscode.Position(line, char+1));
             return new vscode.Diagnostic(range, message);
         }
@@ -92,6 +86,8 @@ export default class ChuckSyntaxCheckProvider {
             this.diagnosticCollection.delete(textDocument.uri);
         }, null, subscriptions);
         vscode.workspace.onDidSaveTextDocument(this.doChuckSyntaxCheck, this);
+
+        vscode.workspace.textDocuments.forEach(this.doChuckSyntaxCheck, this);
     }
 
     public dispose(): void {

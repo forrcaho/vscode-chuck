@@ -3,7 +3,6 @@ import * as vscode from 'vscode';
 import ChuckSyntaxCheckProvider from './features/chuckSyntaxCheckProvider';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('activate called');
     let config = vscode.workspace.getConfiguration("chuck");
      let syntaxCheckEnabled = config.get("enableSyntaxCheck", false);
     if (syntaxCheckEnabled) {
