@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-import ChuckSyntaxCheckProvider from './features/chuckSyntaxCheckProvider';
+import ChuckSyntaxCheckProvider from './chuckSyntaxCheckProvider';
 
 export function activate(context: vscode.ExtensionContext) {
     let config = vscode.workspace.getConfiguration("chuck");
