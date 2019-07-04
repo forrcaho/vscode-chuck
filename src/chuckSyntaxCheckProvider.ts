@@ -29,7 +29,7 @@ export default class ChuckSyntaxCheckProvider {
         // will actually go into the config in memory, and be in the args of our next syntax check.
         let args: string[] = [...config.get("syntaxCheckArgs", [])];
         args.push(textDocument.fileName);
-        let options = vscode.workspace.rootPath ? { cwd: vscode.workspace.rootPath } : undefined;
+        let options = { cwd: path.dirname(this.document.fileName) };
 
         let childProcess = cp.spawn(command, args, options);
         if (childProcess.pid) {

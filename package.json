@@ -24,11 +24,17 @@
         "Programming Languages"
     ],
     "activationEvents": [
-        "onLanguage:chuck"
+        "onLanguage:chuck",
+        "onCommand:extension.chuckPlayActiveDocument"
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands":[],
+        "commands":[
+            {
+                "command": "extension.chuckPlayActiveDocument",
+                "title": "ChucK: Play Active Document"
+            }
+        ],
         "configuration": {
             "type": "object",
             "title": "ChucK",
