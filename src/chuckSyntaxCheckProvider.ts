@@ -2,7 +2,6 @@
 
 import * as path from 'path';
 import * as cp from 'child_process';
-import ChildProcess = cp.ChildProcess;
 
 import * as vscode from 'vscode';
 
@@ -20,18 +19,18 @@ export default class ChuckSyntaxCheckProvider {
         if (this.document.languageId !== 'chuck') {
             return;
         }
-        let diagnostics: vscode.Diagnostic[] = [];
+        const diagnostics: vscode.Diagnostic[] = [];
         let errBuf = '';
 
-        let config = vscode.workspace.getConfiguration("chuck");
-        let command = config.get("executable", "chuck");
+        const config = vscode.workspace.getConfiguration("chuck");
+        const command = config.get("executable", "chuck");
         // We need to clone the args array because if we don't, when we push the filename on, it
         // will actually go into the config in memory, and be in the args of our next syntax check.
-        let args: string[] = [...config.get("syntaxCheckArgs", [])];
+        const args: string[] = [...config.get("syntaxCheckArgs", [])];
         args.push(textDocument.fileName);
-        let options = { cwd: path.dirname(this.document.fileName) };
+        const options = { cwd: path.dirname(this.document.fileName) };
 
-        let childProcess = cp.spawn(command, args, options);
+        const childProcess = cp.spawn(command, args, options);
         if (childProcess.pid) {
             childProcess.stderr.on('data', (data: Buffer) => {
                 errBuf += data;
@@ -53,26 +52,30 @@ export default class ChuckSyntaxCheckProvider {
     private parseLine(errLine: string) : vscode.Diagnostic | undefined {
         let match = this.chuckEMErrorRegex.exec(errLine);
         if (match) {
-            let fileName = match[1];
+            const fileName = match[1];
             if (path.basename(this.document.uri.fsPath) !== fileName) {
-                console.log("not this file");
+                // TODO: it _might_ be possible to return diagnostics for files other
+                // than the currently active one if they're open in another tab.
+                console.log("Syntax error for a different file");
                 return;
             }
-            let line = +match[2] - 1;
-            let char = +match[3] - 1;
-            let message = match[4];
-            let range = new vscode.Range(new vscode.Position(line, char), new vscode.Position(line, char+1));
+            const line = +match[2] - 1;
+            const char = +match[3] - 1;
+            const message = match[4];
+            const range = new vscode.Range(new vscode.Position(line, char), new vscode.Position(line, char+1));
             return new vscode.Diagnostic(range, message);
         }
         match = this.chuckEMError2Regex.exec(errLine);
         if (match) {
-            let fileName = match[1];
+            const fileName = match[1];
             if (path.basename(this.document.uri.fsPath) !== fileName) {
+                // See TODO above
+                console.log("Syntax error for a different file");
                 return;
             }
-            let line = +match[2] - 1;
-            let message = match[3];
-            let range = this.document.lineAt(line).range;
+            const line = +match[2] - 1;
+            const message = match[3];
+            const range = this.document.lineAt(line).range;
             return new vscode.Diagnostic(range, message);
         }
         return;

@@ -58,6 +58,11 @@
                     "type": "array",
                     "default": [],
                     "description": "Arguments to chuck when used for playing the current file. An array of strings, each element an argument including the leading dash."
+                },
+                "chuck.saveSilentlyOnPlay": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Save without prompting before playing the current file."
                 }
             }
         },
