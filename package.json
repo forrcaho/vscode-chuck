@@ -2,7 +2,7 @@
     "name": "chuck",
     "displayName": "ChucK",
     "description": "Syntax highlighting for the ChucK langauge (http://chuck.cs.princeton.edu/)",
-    "version": "0.0.2",
+    "version": "0.2.0",
     "publisher": "forrcaho",
     "author": {
         "name": "Forrest Cahoon"
@@ -66,6 +66,13 @@
                 }
             }
         },
+        "grammars": [
+            {
+                "language": "chuck",
+                "scopeName": "source.chuck",
+                "path": "./syntaxes/chuck.tmLanguage.json"
+            }
+        ],
         "languages": [
             {
                 "id": "chuck",
@@ -79,13 +86,12 @@
                 "configuration": "./language-configuration.json"
             }
         ],
-        "grammars": [
-            {
-                "language": "chuck",
-                "scopeName": "source.chuck",
-                "path": "./syntaxes/chuck.tmLanguage.json"
-            }
-        ]
+        "keybindings": [{
+            "command": "extension.chuckPlayActiveDocument",
+            "key": "ctrl+.",
+            "mac": "cmd+.",
+            "when": "editorLangId == chuck && editorFocus"
+        }]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
