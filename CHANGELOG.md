@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD024 -->
 # Change Log
 
 All notable changes to the "chuck" extension will be documented in this file.
@@ -6,14 +7,16 @@ This document attempts to follow the structure described at [Keep a Changelog](h
 
 ## [Unreleased]
 
-## [0.2.0] - 2019-07-25
+## [0.2.0] - 2019-09-09
 
 ### Added
 
 - Syntax checking. This uses ChucK's `--syntax` command-line switch, which has not
   yet made it into an official release version. You will need to build ChucK from
   the [Github source](https://github.com/ccrma/chuck) to use this. For that reason,
-  this feature is disabled by default.
+  this feature is disabled by default. The setting `chuck.extendErrorRegion` is provided
+  to extend the marked error region backwards from what ChucK reports, making it more
+  likely to include the actual error.
 
 - Play Active Document command: Invoke ChucK to play the file in the currently-active
   text editor window. Bound by default to `ctrl+.` (Mnemonic is that key has `>` on it
