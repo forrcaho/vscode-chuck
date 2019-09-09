@@ -9,11 +9,8 @@ export function activate(context: vscode.ExtensionContext) {
     const config = vscode.workspace.getConfiguration("chuck");
     const syntaxCheckEnabled = config.get("enableSyntaxCheck", false);
     if (syntaxCheckEnabled) {
-        console.log("Syntax check enabled: loading provider");
         const syntaxChecker = new ChuckSyntaxCheckProvider();
         syntaxChecker.activate(context.subscriptions);
-    } else {
-        console.log("Syntax check not enabled.");
     }
 
     // play command

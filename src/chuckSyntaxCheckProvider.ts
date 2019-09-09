@@ -15,7 +15,6 @@ export default class ChuckSyntaxCheckProvider {
     private chuckEMError2Regex = /^\[([^\]]+)\]:line\((\d+)\):\s(.*)$/;
 
     private doChuckSyntaxCheck(textDocument: vscode.TextDocument) {
-        console.log("entering syntax check code");
         if (textDocument.languageId !== 'chuck') {
             return;
         }
@@ -105,10 +104,7 @@ export default class ChuckSyntaxCheckProvider {
         let lineNum = reportedStartPosition.line;
         let charNum = reportedStartPosition.character;
         let lineText = this.document.lineAt(lineNum).text;
-        console.log("Examining line: " + lineText);
-
         lineText = lineText.substring(0, charNum);
-        console.log("Examining line text: " + lineText);
         let startPosition = reportedStartPosition;
         
         while (!statementEndFound) {
