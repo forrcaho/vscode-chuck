@@ -54,6 +54,11 @@
                     "default": [ "--syntax" ],
                     "description": "Arguments to chuck when used for syntax checking. An array of strings, each element an argument including the leading dash."
                 },
+                "chuck.extendErrorRegion": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Boolean to extend the highlighted error region backwards from what chuck reports to just past the previous statement end."
+                },
                 "chuck.playArgs": {
                     "type": "array",
                     "default": [],
