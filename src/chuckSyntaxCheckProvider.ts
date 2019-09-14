@@ -13,6 +13,8 @@ export default class ChuckSyntaxCheckProvider {
 
     private chuckEMErrorRegex = /^\[([^\]]+)\]:line\((\d+)\)\.char\((\d+)\):\s(.*)$/;
     private chuckEMError2Regex = /^\[([^\]]+)\]:line\((\d+)\):\s(.*)$/;
+    private statementEndRegex = /[;\}]/;
+    private nonWhitespaceRegex = /\S/;
 
     private doChuckSyntaxCheck(textDocument: vscode.TextDocument) {
         if (textDocument.languageId !== 'chuck') {
@@ -79,7 +81,8 @@ export default class ChuckSyntaxCheckProvider {
             const message = match[3];
             const line = this.document.lineAt(lineNum)
             const endPosition = line.range.end;
-            const startPosition = this.getErrorRangeStartPosition(line.range.start);
+            let startCharNum = line.isEmptyOrWhitespace ? 0 : line.firstNonWhitespaceCharacterIndex;
+            const startPosition = this.getErrorRangeStartPosition(new vscode.Position(lineNum, startCharNum));
             const range = new vscode.Range(startPosition, endPosition);
             return new vscode.Diagnostic(range, message);
         }
@@ -98,8 +101,6 @@ export default class ChuckSyntaxCheckProvider {
         // I didn't think it was worth the effort to avoid this. If you want to
         // fix it, please submit a PR.
 
-        const statementEndRegex = /[;\}]/;
-        const nonWhitespaceRegex = /\S/;
         let statementEndFound = false;
         let lineNum = reportedStartPosition.line;
         let charNum = reportedStartPosition.character;
@@ -108,17 +109,17 @@ export default class ChuckSyntaxCheckProvider {
         let startPosition = reportedStartPosition;
         
         while (!statementEndFound) {
-            let match = statementEndRegex.exec(lineText);
+            let match = this.statementEndRegex.exec(lineText);
             if (match !== null) {
                 statementEndFound = true;
                 let lineOffset = match.index+1;
                 lineText = lineText.substring(lineOffset);
-                match = nonWhitespaceRegex.exec(lineText);
+                match = this.nonWhitespaceRegex.exec(lineText);
                 if (match !== null) {
                     startPosition = new vscode.Position(lineNum, lineOffset + match.index);
                 }
             } else {
-                match = nonWhitespaceRegex.exec(lineText);
+                match = this.nonWhitespaceRegex.exec(lineText);
                 if (match !== null) {
                     startPosition = new vscode.Position(lineNum, match.index);
                 }
