@@ -93,8 +93,7 @@
         ],
         "keybindings": [{
             "command": "extension.chuckPlayActiveDocument",
-            "key": "ctrl+.",
-            "mac": "cmd+.",
+            "key": "alt+.",
             "when": "editorLangId == chuck && editorFocus"
         }]
     },
