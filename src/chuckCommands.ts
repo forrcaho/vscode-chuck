@@ -8,6 +8,9 @@ import * as vscode from 'vscode';
 export async function playActiveDocument(textEditor: vscode.TextEditor) {
     const config = vscode.workspace.getConfiguration("chuck");
     const document = textEditor.document;
+    if (document.languageId !== 'chuck') {
+        return;
+    }
     if (document.isDirty) {
         if (!config.get("saveSilentlyOnPlay")) {
             const selection = await saveToPlayDialog();
