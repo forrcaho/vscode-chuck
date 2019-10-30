@@ -19,7 +19,13 @@ export function activate(context: vscode.ExtensionContext) {
         commands.playActiveDocument);
     context.subscriptions.push(playCommand);
 
+    const killCommand = vscode.commands.registerTextEditorCommand(
+        'extension.chuckKillChuckProcess',
+        commands.killChuckProcess);
+    context.subscriptions.push(killCommand);
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() { }
+export function deactivate() {
+    commands.killChuckProcess();
+}

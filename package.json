@@ -2,7 +2,7 @@
     "name": "chuck",
     "displayName": "ChucK",
     "description": "Syntax highlighting for the ChucK langauge (http://chuck.cs.princeton.edu/)",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "publisher": "forrcaho",
     "author": {
         "name": "Forrest Cahoon"
@@ -25,7 +25,8 @@
     ],
     "activationEvents": [
         "onLanguage:chuck",
-        "onCommand:extension.chuckPlayActiveDocument"
+        "onCommand:extension.chuckPlayActiveDocument",
+        "onCommand:extension.chuckKillChuckProcess"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -33,6 +34,10 @@
             {
                 "command": "extension.chuckPlayActiveDocument",
                 "title": "ChucK: Play Active Document"
+            },
+            {
+                "command": "extension.chuckKillChuckProcess",
+                "title": "ChucK: Terminate any running ChucK subprocesses"
             }
         ],
         "configuration": {
@@ -91,11 +96,18 @@
                 "configuration": "./language-configuration.json"
             }
         ],
-        "keybindings": [{
-            "command": "extension.chuckPlayActiveDocument",
-            "key": "alt+.",
-            "when": "editorLangId == chuck && editorFocus"
-        }]
+        "keybindings": [
+            {
+                "command": "extension.chuckPlayActiveDocument",
+                "key": "alt+.",
+                "when": "editorLangId == chuck && editorFocus"
+            },
+            {
+                "command": "extension.chuckKillChuckProcess",
+                "key": "alt+escape",
+                "when": "editorLangId == chuck && editorFocus"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

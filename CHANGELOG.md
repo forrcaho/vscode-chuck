@@ -7,6 +7,23 @@ This document attempts to follow the structure described at [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.2.1] - 2019-10-19
+
+### Added
+
+- Write output from ChucK subprocess to output window
+- Add command to kill any running ChucK subprocesses, bound to `alt+escape` when in any
+  ChucK editor window
+
+### Changed
+
+- Change keybinding to `alt+.` to avoid collision with Quick Fix
+
+### Fixed
+
+- Bugfix: Wait until active editor window is saved before playing
+- Bugfix: Don't highlight indentation whitespace on line syntax error
+
 ## [0.2.0] - 2019-09-09
 
 ### Added

@@ -5,7 +5,8 @@ This extension is for the [ChucK music programming language](http://chuck.cs.pri
 
 * Syntax highlighting
 * Syntax checking
-* A command to play the ChucK file in the active editor window.
+* A command to play the ChucK file in the active editor window, and a command to
+  kill any Chuck process started this way.
 
 The syntax checking feature relies on  ChucK's `--syntax` command-line switch, which has
 not yet made it into an official release version. You will need to build ChucK from the
@@ -29,11 +30,15 @@ and much more likely to include the actual error.
 
 Even so, `chuck.extendErrorRegion` is turned off by default.
 
-The command to play the currently active ChucK file is bound by default to  `ctrl+.`.
-(Mnemonic is that key has `>` on it which looks like a play button, but we don't use
-shift to avoid keybinding collisions.) When you invoke this command on an unsaved ChucK
-editor window, you will be prompted to save, with the option to always save silently
-before playing from then on.
+The command to play the currently active ChucK file is bound by default to the `alt+.` key combo.
+(Mnemonic is that key has `>` on it which looks like a play button, but we don't use shift to
+avoid keybinding collisions.) When you invoke this command on an unsaved ChucK editor window,
+you will be prompted to save, with the option to always save silently before playing from then on.
+Any output is written to the output window.
+
+Multiple ChucK processes playing the same or different files can be invoked at once.
+This is supposed to be a feature, not a bug. To kill all running ChucK processes started
+this way, press `alt+escape` when in any ChucK text editor window.
 
 Here is a table of the configuration settings provided by this extension. Most users should
 be able to configure everything in VSCode's settings dialog, but they are provided here for
