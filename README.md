@@ -1,17 +1,20 @@
 <!-- markdownlint-disable MD033 -->
+
 # vscode-chuck
 
-This extension is for the [ChucK music programming language](http://chuck.cs.princeton.edu/). It implements:
+This extension is for the [ChucK music programming language](http://chuck.stanford.edu/). It implements:
 
-* Syntax highlighting
-* Syntax checking
-* A command to play the ChucK file in the active editor window, and a command to
+- Syntax highlighting
+- Syntax checking
+- A command to play the ChucK file in the active editor window, and a command to
   kill any Chuck process started this way.
 
-The syntax checking feature relies on  ChucK's `--syntax` command-line switch, which has
-not yet made it into an official release version. You will need to build ChucK from the
-[Github source](https://github.com/ccrma/chuck) to use this. For that reason, this
-feature is disabled by default.
+The syntax checking feature relies on ChucK's `--syntax` command-line switch, which has been
+in the official release since at least 1.5.x. The syntax checking does not know about objects
+defined in other files that are intended to be available at runtime using `Machine.add()`,
+so multi-file projects will contain suprious errors. For this reason, syntax checking is
+turned off by default. Any suggestions for handling multi-file project syntax checking would
+be most welcome; code fixes doubly so.
 
 The syntax checker reports errors at the location given by ChucK's error messages. These
 can be a bit off; the actual error may be just before the marked section; look backwards
@@ -44,13 +47,13 @@ Here is a table of the configuration settings provided by this extension. Most u
 be able to configure everything in VSCode's settings dialog, but they are provided here for
 completeness.
 
-| setting                    | default          | description                                                                                                                               |
-| -------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `chuck.executable`         | `"chuck"`        | The chuck executable                                                                                                                      |
-| `chuck.enableSyntaxCheck`  | `false`          | Boolean to enable syntax check.                                                                                                           |
-| `chuck.syntaxCheckArgs`    | `[ "--syntax" ]` | Arguments to chuck when used for syntax checking.<br />An array of strings, each element an argument including the leading dash.          |
-| `chuck.extendErrorRegion`  | `false`          | Boolean to extend the highlighted error region backwards from what chuck reports<br /> to just past the previous statement end.           |
-| `chuck.playArgs`           | `[]`             | Arguments to chuck when used for playing the current file.<br />An array of strings, each element an argument including the leading dash. |
-| `chuck.saveSilentlyOnPlay` | `false`          | Save without prompting before playing the current file.                                                                                   |
+| setting                    | default                         | description                                                                                                                               |
+| -------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `chuck.executable`         | `"chuck"`                       | The chuck executable                                                                                                                      |
+| `chuck.enableSyntaxCheck`  | `false`                         | Boolean to enable syntax check.                                                                                                           |
+| `chuck.syntaxCheckArgs`    | `[ "--color:off", "--syntax" ]` | Arguments to chuck when used for syntax checking.<br />An array of strings, each element an argument including the leading dash.          |
+| `chuck.extendErrorRegion`  | `false`                         | Boolean to extend the highlighted error region backwards from what chuck reports<br /> to just past the previous statement end.           |
+| `chuck.playArgs`           | `[]`                            | Arguments to chuck when used for playing the current file.<br />An array of strings, each element an argument including the leading dash. |
+| `chuck.saveSilentlyOnPlay` | `false`                         | Save without prompting before playing the current file.                                                                                   |
 
 Syntax checking was initially ported from Courtney Wilburn's [Atom extension](https://github.com/cjwilburn/language-chuck).

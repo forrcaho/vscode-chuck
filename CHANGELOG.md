@@ -7,6 +7,13 @@ This document attempts to follow the structure described at [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.2.2] - 2023-09-22
+
+### Fixed
+
+- Works on MS Windows
+- Syntax message parsing updated to use chuck 1.5.x
+
 ## [0.2.1] - 2019-10-19
 
 ### Added
