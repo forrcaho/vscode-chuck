@@ -80,7 +80,7 @@ async function saveToPlayDialog(): Promise<string> {
 
 async function setSaveSilentlyOnPlay() {
   const config = vscode.workspace.getConfiguration("chuck");
-  config.update("saveSilentlyOnPlay", "true", true);
+  config.update("saveSilentlyOnPlay", true, true);
 }
 
 export function killChuckProcess() {

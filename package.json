@@ -2,7 +2,7 @@
   "name": "chuck",
   "displayName": "ChucK",
   "description": "Syntax highlighting for the ChucK langauge (http://chuck.stanford.edu/)",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "publisher": "forrcaho",
   "author": {
     "name": "Forrest Cahoon"
