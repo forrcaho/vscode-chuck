@@ -1,128 +1,128 @@
 {
-    "name": "chuck",
-    "displayName": "ChucK",
-    "description": "Syntax highlighting for the ChucK langauge (http://chuck.cs.princeton.edu/)",
-    "version": "0.2.1",
-    "publisher": "forrcaho",
-    "author": {
-        "name": "Forrest Cahoon"
-    },
-    "license": "MIT",
-    "homepage": "https://github.com/forrcaho/vscode-chuck",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/forrcaho/vscode-chuck"
-    },
-    "bugs": {
-        "url": "https://github.com/forrcaho/vscode-chuck/issues"
-    },
-    "icon": "chuck.png",
-    "engines": {
-        "vscode": "^1.25.0"
-    },
-    "categories": [
-        "Programming Languages"
+  "name": "chuck",
+  "displayName": "ChucK",
+  "description": "Syntax highlighting for the ChucK langauge (http://chuck.stanford.edu/)",
+  "version": "0.2.2",
+  "publisher": "forrcaho",
+  "author": {
+    "name": "Forrest Cahoon"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/forrcaho/vscode-chuck",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forrcaho/vscode-chuck"
+  },
+  "bugs": {
+    "url": "https://github.com/forrcaho/vscode-chuck/issues"
+  },
+  "icon": "chuck.png",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.chuckPlayActiveDocument",
+        "title": "ChucK: Play Active Document"
+      },
+      {
+        "command": "extension.chuckKillChuckProcess",
+        "title": "ChucK: Terminate any running ChucK subprocesses"
+      }
     ],
-    "activationEvents": [
-        "onLanguage:chuck",
-        "onCommand:extension.chuckPlayActiveDocument",
-        "onCommand:extension.chuckKillChuckProcess"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.chuckPlayActiveDocument",
-                "title": "ChucK: Play Active Document"
-            },
-            {
-                "command": "extension.chuckKillChuckProcess",
-                "title": "ChucK: Terminate any running ChucK subprocesses"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "ChucK",
-            "properties": {
-                "chuck.executable": {
-                    "type": "string",
-                    "default": "chuck",
-                    "description": "The chuck executable"
-                },
-                "chuck.enableSyntaxCheck": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Boolean to enable syntax check."
-                },
-                "chuck.syntaxCheckArgs": {
-                    "type": "array",
-                    "default": [
-                        "--syntax"
-                    ],
-                    "description": "Arguments to chuck when used for syntax checking. An array of strings, each element an argument including the leading dash."
-                },
-                "chuck.extendErrorRegion": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Boolean to extend the highlighted error region backwards from what chuck reports to just past the previous statement end."
-                },
-                "chuck.playArgs": {
-                    "type": "array",
-                    "default": [],
-                    "description": "Arguments to chuck when used for playing the current file. An array of strings, each element an argument including the leading dash."
-                },
-                "chuck.saveSilentlyOnPlay": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Save without prompting before playing the current file."
-                }
-            }
+    "configuration": {
+      "type": "object",
+      "title": "ChucK",
+      "properties": {
+        "chuck.executable": {
+          "type": "string",
+          "default": "chuck",
+          "description": "The chuck executable"
         },
-        "grammars": [
-            {
-                "language": "chuck",
-                "scopeName": "source.chuck",
-                "path": "./syntaxes/chuck.tmLanguage.json"
-            }
-        ],
-        "languages": [
-            {
-                "id": "chuck",
-                "aliases": [
-                    "ChucK",
-                    "chuck"
-                ],
-                "extensions": [
-                    ".ck"
-                ],
-                "configuration": "./language-configuration.json"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "extension.chuckPlayActiveDocument",
-                "key": "alt+.",
-                "when": "editorLangId == chuck && editorFocus"
-            },
-            {
-                "command": "extension.chuckKillChuckProcess",
-                "key": "alt+escape",
-                "when": "editorLangId == chuck && editorFocus"
-            }
-        ]
+        "chuck.enableSyntaxCheck": {
+          "type": "boolean",
+          "default": false,
+          "description": "Boolean to enable syntax check."
+        },
+        "chuck.syntaxCheckArgs": {
+          "type": "array",
+          "default": [
+            "--color:off",
+            "--syntax"
+          ],
+          "description": "Arguments to chuck when used for syntax checking. An array of strings, each element an argument including the leading dash."
+        },
+        "chuck.extendErrorRegion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Boolean to extend the highlighted error region backwards from what chuck reports to just past the previous statement end."
+        },
+        "chuck.playArgs": {
+          "type": "array",
+          "default": [],
+          "description": "Arguments to chuck when used for playing the current file. An array of strings, each element an argument including the leading dash."
+        },
+        "chuck.saveSilentlyOnPlay": {
+          "type": "boolean",
+          "default": false,
+          "description": "Save without prompting before playing the current file."
+        }
+      }
     },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^3.3.1",
-        "vscode": "^1.1.28",
-        "tslint": "^5.12.1",
-        "@types/node": "^10.12.21",
-        "@types/mocha": "^2.2.42"
-    }
+    "grammars": [
+      {
+        "language": "chuck",
+        "scopeName": "source.chuck",
+        "path": "./syntaxes/chuck.tmLanguage.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "chuck",
+        "aliases": [
+          "ChucK",
+          "chuck"
+        ],
+        "extensions": [
+          ".ck"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.chuckPlayActiveDocument",
+        "key": "alt+.",
+        "when": "editorLangId == chuck && editorFocus"
+      },
+      {
+        "command": "extension.chuckKillChuckProcess",
+        "key": "alt+escape",
+        "when": "editorLangId == chuck && editorFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint \"src/**/*.ts\"",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^10.12.21",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint": "^8.49.0"
+  },
+  "dependencies": {
+    "@types/vscode": "^1.82.0",
+    "@vscode/test-electron": "^2.3.4",
+    "typescript": "^5.2.2"
+  }
 }
