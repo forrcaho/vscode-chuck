@@ -1,4 +1,5 @@
 <!-- markdownlint-disable MD024 -->
+
 # Change Log
 
 All notable changes to the "chuck" extension will be documented in this file.
@@ -6,6 +7,10 @@ All notable changes to the "chuck" extension will be documented in this file.
 This document attempts to follow the structure described at [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.2.3] - 2023-09-23
+
+- Bugfix: Save silently on play setting now saved correctly from dialog (thanks Clint Hoagland)
 
 ## [0.2.2] - 2023-09-22
 
