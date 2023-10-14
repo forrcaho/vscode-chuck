@@ -31,9 +31,12 @@ export async function playActiveDocument(textEditor: vscode.TextEditor) {
   // We need to clone the args array because if we don't, when we push the filename on, it
   // will actually go into the config in memory, and be in the args of our next play command.
   const args: string[] = [...config.get("playArgs", [])];
-  const fileName = fixMSWindowsPath(document.fileName);
-  args.push(`"${fileName}"`);
-  const options: cp.SpawnOptions = { cwd: path.dirname(fileName) };
+  if (runningOnMSWindows()) {
+    args.push(`"${fixMSWindowsPath(document.fileName)}"`);
+  } else {
+    args.push(document.fileName);
+  }
+  const options: cp.SpawnOptions = { cwd: path.dirname(document.fileName) };
   if (runningOnMSWindows()) {
     options.shell = true;
   }
