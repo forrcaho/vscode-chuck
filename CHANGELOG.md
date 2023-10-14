@@ -8,6 +8,12 @@ This document attempts to follow the structure described at [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.2.4] - 2023-10-14
+
+- Kill all ChucK subprocesses now works correctly on MS Windows
+- Kill all Chuck subprocesses keybinding changed from `alt+escape` to `` alt+` ``
+  to avoid a keybinding collision with MS Windows
+
 ## [0.2.3] - 2023-09-23
 
 - Bugfix: Save silently on play setting now saved correctly from dialog (thanks Clint Hoagland)
