@@ -54,7 +54,7 @@ export async function playActiveDocument(textEditor: vscode.TextEditor) {
   });
 
   if (childProcess.pid) {
-    console.log("Chuck is playing");
+    console.log(`Chuck is playing (pid ${childProcess.pid})`);
   }
 }
 
@@ -89,8 +89,12 @@ export function killChuckProcess() {
     if (p === undefined) {
       delete processMap[pid];
     } else {
-      console.log("Killing Chuck process (pid " + p.pid + ")");
-      p.kill("SIGTERM");
+      console.log(`Killing Chuck process (pid ${p.pid})`);
+      if (runningOnMSWindows()) {
+        cp.exec(`taskkill -F -T -PID ${p.pid}`);
+      } else {
+        p.kill("SIGTERM");
+      }
       console.log("Chuck subprocess terminated");
     }
   }

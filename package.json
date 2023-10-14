@@ -2,7 +2,7 @@
   "name": "chuck",
   "displayName": "ChucK",
   "description": "Syntax highlighting for the ChucK langauge (http://chuck.stanford.edu/)",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "publisher": "forrcaho",
   "author": {
     "name": "Forrest Cahoon"
@@ -102,7 +102,7 @@
       },
       {
         "command": "extension.chuckKillChuckProcess",
-        "key": "alt+escape",
+        "key": "alt+`",
         "when": "editorLangId == chuck && editorFocus"
       }
     ]

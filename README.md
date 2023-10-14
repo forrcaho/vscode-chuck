@@ -41,7 +41,8 @@ Any output is written to the output window.
 
 Multiple ChucK processes playing the same or different files can be invoked at once.
 This is supposed to be a feature, not a bug. To kill all running ChucK processes started
-this way, press `alt+escape` when in any ChucK text editor window.
+this way, press `` alt+` `` when in any ChucK text editor window. (This used to be `alt+escape`
+but it was moved to avoid a keybinding collision in Windows.)
 
 Here is a table of the configuration settings provided by this extension. Most users should
 be able to configure everything in VSCode's settings dialog, but they are provided here for
