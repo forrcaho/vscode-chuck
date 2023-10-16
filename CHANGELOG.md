@@ -6,7 +6,10 @@ All notable changes to the "chuck" extension will be documented in this file.
 
 This document attempts to follow the structure described at [Keep a Changelog](http://keepachangelog.com/).
 
-## [Unreleased]
+## [0.2.5] - 2023-10-15
+
+- Add icon for ChucK files
+- Bundle extension using esbuild
 
 ## [0.2.4] - 2023-10-14
 

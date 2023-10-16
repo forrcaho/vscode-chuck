@@ -2,7 +2,7 @@
   "name": "chuck",
   "displayName": "ChucK",
   "description": "Syntax highlighting for the ChucK langauge (http://chuck.stanford.edu/)",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "publisher": "forrcaho",
   "author": {
     "name": "Forrest Cahoon"
@@ -91,7 +91,11 @@
         "extensions": [
           ".ck"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/chuck_icon_128x128.png",
+          "dark": "./icons/chuck_icon_128x128.png"
+        }
       }
     ],
     "keybindings": [
@@ -108,21 +112,24 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
+    "vscode:prepublish": "npm run -S esbuild-base -- --minify",
+    "esbuild-base": "rimraf out && esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run -S esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run -S esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./",
     "lint": "eslint \"src/**/*.ts\"",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.21",
+    "@types/vscode": "^1.75.0",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
-    "eslint": "^8.49.0"
-  },
-  "dependencies": {
-    "@types/vscode": "^1.82.0",
-    "@vscode/test-electron": "^2.3.4",
+    "@vscode/test-electron": "^2.3.5",
+    "esbuild": "^0.19.4",
+    "eslint": "^8.49.0",
+    "rimraf": "^5.0.5",
     "typescript": "^5.2.2"
   }
 }
