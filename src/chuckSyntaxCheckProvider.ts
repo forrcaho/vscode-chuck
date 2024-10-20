@@ -1,5 +1,5 @@
-import * as cp from "child_process";
-import * as path from "path";
+import * as cp from "node:child_process";
+import * as path from "node:path";
 import * as vscode from "vscode";
 import { fixMSWindowsPath, runningOnMSWindows } from "./utils";
 
@@ -40,12 +40,12 @@ export default class ChuckSyntaxCheckProvider {
     }
     const childProcess = cp.spawn(command, args, options);
     if (childProcess.pid) {
-      childProcess.stderr.on("data", (data: Buffer) => {
+      childProcess.stderr?.on("data", (data: Buffer) => {
         console.log(`Recevied stderr data event with \n${data}`);
         errBuf += data;
       });
 
-      childProcess.stderr.on("end", () => {
+      childProcess.stderr?.on("end", () => {
         console.log(`Received stderr end event`);
         let diagnostic: vscode.Diagnostic | undefined;
         for (let errLine of errBuf.split(/\r?\n/)) {
