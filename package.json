@@ -2,7 +2,7 @@
   "name": "chuck",
   "displayName": "ChucK",
   "description": "Syntax highlighting for the ChucK langauge (http://chuck.stanford.edu/)",
-  "version": "0.2.5",
+  "version": "1.0.0",
   "publisher": "forrcaho",
   "author": {
     "name": "Forrest Cahoon"
@@ -18,7 +18,7 @@
   },
   "icon": "chuck.png",
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^1.94.0"
   },
   "categories": [
     "Programming Languages"
@@ -121,15 +121,16 @@
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.42",
-    "@types/node": "^10.12.21",
-    "@types/vscode": "^1.75.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.2",
-    "@typescript-eslint/parser": "^6.7.2",
-    "@vscode/test-electron": "^2.3.5",
-    "esbuild": "^0.19.4",
-    "eslint": "^8.49.0",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.2.2"
+    "@types/mocha": "^10.0.9",
+    "@types/node": "^22.7.7",
+    "@types/vscode": "^1.94.0",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.10.0",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3"
   }
 }

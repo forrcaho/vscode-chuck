@@ -6,6 +6,7 @@ This extension is for the [ChucK music programming language](http://chuck.stanfo
 
 - Syntax highlighting
 - Syntax checking
+- Hover text contextual documentation
 - A command to play the ChucK file in the active editor window, and a command to
   kill any Chuck process started this way.
 
@@ -57,4 +58,4 @@ completeness.
 | `chuck.playArgs`           | `[]`                            | Arguments to chuck when used for playing the current file.<br />An array of strings, each element an argument including the leading dash. |
 | `chuck.saveSilentlyOnPlay` | `false`                         | Save without prompting before playing the current file.                                                                                   |
 
-Syntax checking was initially ported from Courtney Wilburn's [Atom extension](https://github.com/cjwilburn/language-chuck).
+Syntax highlighting was initially ported from Courtney Wilburn's [Atom extension](https://github.com/cjwilburn/language-chuck).

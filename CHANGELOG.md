@@ -6,6 +6,10 @@ All notable changes to the "chuck" extension will be documented in this file.
 
 This document attempts to follow the structure described at [Keep a Changelog](http://keepachangelog.com/).
 
+## [1.0.0] - 2024-10-20
+
+- Add hover text (ported from WebChuck IDE)
+
 ## [0.2.5] - 2023-10-15
 
 - Add icon for ChucK files

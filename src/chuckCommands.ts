@@ -41,23 +41,23 @@ export async function playActiveDocument(textEditor: vscode.TextEditor) {
     options.shell = true;
   }
   const childProcess = cp.spawn(command, args, options);
-  processMap[childProcess.pid] = childProcess;
-
-  childProcess.stdout.on("data", (data) => {
-    output.append(data.toString());
-    output.show(true); // show output but preserve focus
-  });
-  childProcess.stderr.on("data", (data) => {
-    output.append(data.toString());
-    output.show(true); // show output but preserve focus
-  });
-
-  childProcess.on("exit", () => {
-    console.log("Chuck is done.");
-  });
-
   if (childProcess.pid) {
     console.log(`Chuck is playing (pid ${childProcess.pid})`);
+    processMap[childProcess.pid] = childProcess;
+
+    childProcess.stdout?.on("data", (data) => {
+      output.append(data.toString());
+      output.show(true); // show output but preserve focus
+    });
+
+    childProcess.stderr?.on("data", (data) => {
+      output.append(data.toString());
+      output.show(true); // show output but preserve focus
+    });
+
+    childProcess.on("exit", () => {
+      console.log("Chuck is done.");
+    });
   }
 }
 

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
 import ChuckSyntaxCheckProvider from './chuckSyntaxCheckProvider';
+import ChuckHoverProvider from './chuckHoverProvider';
 import * as commands from './chuckCommands';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -12,6 +13,9 @@ export function activate(context: vscode.ExtensionContext) {
         const syntaxChecker = new ChuckSyntaxCheckProvider();
         syntaxChecker.activate(context.subscriptions);
     }
+    // hover provider
+    const hoverProvider = new ChuckHoverProvider();
+    vscode.languages.registerHoverProvider({language: "chuck"}, hoverProvider);
 
     // play command
     const playCommand = vscode.commands.registerTextEditorCommand(
