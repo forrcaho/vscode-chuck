@@ -32,7 +32,7 @@ export default class ChuckSyntaxCheckProvider {
     // will actually go into the config in memory, and be in the args of our next syntax check.
     const args: string[] = [...(this.config.get("syntaxCheckArgs") as string[])];
     const fileName = fixMSWindowsPath(this.document.fileName);
-    args.push(`"${fileName}"`);
+    args.push(fileName);
     const options: cp.SpawnOptions = { cwd: path.dirname(fileName) };
     if (runningOnMSWindows()) {
       options.shell = true;
