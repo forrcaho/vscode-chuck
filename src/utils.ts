@@ -10,7 +10,10 @@ export const runningOnMSWindows = () => {
 /**
  * On Windows, this function takes in a file path string and
  * if there are single backslash separators, changes those to
- * forward slashes.
+ * forward slashes. It then returns the path in double quotes,
+ * in case there are whitespace characters in the path.
+ * (Quotes are required when the subprocess is spawned in a shell,
+ * and forbidden otherwise. Only Windows uses a shell.)
  *
  * On sane OSes, it returns the path unchanged.
  *
@@ -24,5 +27,5 @@ export const fixMSWindowsPath = (path: string) => {
   if (!path.match(/[^\\]\\[^\\]/)) {
     return path;
   }
-  return path.replace(/\\/g, "/");
+  return `"${path.replace(/\\/g, "/")}"`;
 };
