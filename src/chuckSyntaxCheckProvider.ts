@@ -27,18 +27,7 @@ export default class ChuckSyntaxCheckProvider {
     const diagnostics: vscode.Diagnostic[] = [];
     let errBuf = "";
 
-    const command = this.config.get("executable", "chuck");
-    // We need to clone the args array because if we don't, when we push the filename on, it
-    // will actually go into the config in memory, and be in the args of our next syntax check.
-    const args: string[] = [...(this.config.get("syntaxCheckArgs") as string[])];
-    const fileName = fixMSWindowsPath(this.document.fileName);
-    args.push(fileName);
-    const options: cp.SpawnOptions = { cwd: path.dirname(fileName) };
-    if (runningOnMSWindows()) {
-      options.shell = true;
-      options.stdio = "overlapped" as any;
-    }
-    const childProcess = cp.spawn(command, args, options);
+    const childProcess = this.spawnChuckProcess();
     if (childProcess.pid) {
       childProcess.stderr?.on("data", (data: Buffer) => {
         console.log(`Recevied stderr data event with \n${data}`);
@@ -57,6 +46,20 @@ export default class ChuckSyntaxCheckProvider {
         this.diagnosticCollection.set(this.document.uri, diagnostics);
       });
     }
+  }
+
+  private spawnChuckProcess(): cp.ChildProcess {
+    const commandName = this.config.get("executable", "chuck");
+    const args = [...(this.config.get("syntaxCheckArgs") as string[])];
+    const cwd = path.dirname(this.document.fileName);
+    if (runningOnMSWindows()) {
+      // Windows requires this subprocess to run in a cmd shell and the file path be quoted
+      args.push(fixMSWindowsPath(this.document.fileName));
+      return cp.spawn(commandName, args, { cwd, shell: true, stdio: "overlapped" });
+    }
+    // For Mac and Linux, this subprocess does not run in a shell and file path must not be quoted
+    args.push(this.document.fileName);
+    return cp.spawn(commandName, args, { cwd });
   }
 
   private parseLine(errLine: string): vscode.Diagnostic | undefined {
