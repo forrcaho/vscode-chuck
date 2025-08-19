@@ -6,6 +6,11 @@ All notable changes to the "chuck" extension will be documented in this file.
 
 This document attempts to follow the structure described at [Keep a Changelog](http://keepachangelog.com/).
 
+## [1.0.1] - 2025-08-18
+
+- Bugfix: syntax error highlighting was broken for Mac and Linux (thanks Nathan Leiby for alerting me to this
+  issue and providing a fix for Mac).
+
 ## [1.0.0] - 2024-10-20
 
 - Add hover text (ported from WebChuck IDE)
