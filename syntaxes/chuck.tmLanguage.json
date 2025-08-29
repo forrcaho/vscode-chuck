@@ -65,6 +65,35 @@
       ]
     },
     {
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.chuck"
+        }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.chuck"
+        }
+      },
+      "name": "string.quoted.single.chuck",
+      "patterns": [
+        {
+          "name": "constant.character.escape.chuck",
+          "match": "\\\\."
+        },
+        {
+          "name": "constant.character.double.chuck",
+          "match": "\""
+        },
+        {
+          "name": "constant.character.chuck",
+          "match": "[^'\\\\\"]"
+        }
+      ]
+    },
+    {
       "match": "<<<|>>>",
       "name": "support.function.debug.chuck"
     },
