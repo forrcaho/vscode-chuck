@@ -6,6 +6,10 @@ All notable changes to the "chuck" extension will be documented in this file.
 
 This document attempts to follow the structure described at [Keep a Changelog](http://keepachangelog.com/).
 
+## [1.0.2] - 2025-08-29
+
+- Fix syntax highlighting for single-quoted string. Report and fix by Ben Hoang, slightly tweaked by me.
+
 ## [1.0.1] - 2025-08-18
 
 - Bugfix: syntax error highlighting was broken for Mac and Linux (thanks Nathan Leiby for alerting me to this
