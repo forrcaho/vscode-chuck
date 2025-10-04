@@ -34,16 +34,19 @@ and much more likely to include the actual error.
 
 Even so, `chuck.extendErrorRegion` is turned off by default.
 
-The command to play the currently active ChucK file is bound by default to the `alt+.` key combo.
-(Mnemonic is that key has `>` on it which looks like a play button, but we don't use shift to
-avoid keybinding collisions.) When you invoke this command on an unsaved ChucK editor window,
-you will be prompted to save, with the option to always save silently before playing from then on.
-Any output is written to the output window.
+**BREAKING CHANGE: As of version 1.0.3 the default keybindings have been changed from using 
+`alt` to using `ctrl` (`cmd` on Mac). This is to avoid a conflict with VSCode's own `` alt+` ``
+keybinding, which now switches between open VSCode instances.**
+
+The command to play the currently active ChucK file is bound by default to the `ctrl+.` 
+(`cmd+` on Mac) key combo. (Mnemonic is that key has `>` on it which looks like a play button,
+but we don't use shift to avoid keybinding collisions.) When you invoke this command on an unsaved
+ChucK editor window, you will be prompted to save, with the option to always save silently before
+playing from then on. Any output is written to the output window.
 
 Multiple ChucK processes playing the same or different files can be invoked at once.
 This is supposed to be a feature, not a bug. To kill all running ChucK processes started
-this way, press `` alt+` `` when in any ChucK text editor window. (This used to be `alt+escape`
-but it was moved to avoid a keybinding collision in Windows.)
+this way, press `` ctrl+` `` when in any ChucK text editor window.
 
 Here is a table of the configuration settings provided by this extension. Most users should
 be able to configure everything in VSCode's settings dialog, but they are provided here for

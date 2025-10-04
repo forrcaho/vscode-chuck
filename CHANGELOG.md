@@ -6,6 +6,11 @@ All notable changes to the "chuck" extension will be documented in this file.
 
 This document attempts to follow the structure described at [Keep a Changelog](http://keepachangelog.com/).
 
+## [1.0.3] - 2025-10-03
+
+- Change default keybindings from `alt` to `ctrl` (`cmd` on Mac) to avoid conflict with VSCode's `` alt+` ``
+  keybinding (which now switches between open instances).
+
 ## [1.0.2] - 2025-08-29
 
 - Fix syntax highlighting for single-quoted string. Report and fix by Ben Hoang, slightly tweaked by me.

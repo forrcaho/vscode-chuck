@@ -2,7 +2,7 @@
   "name": "chuck",
   "displayName": "ChucK",
   "description": "Syntax highlighting for the ChucK langauge (http://chuck.stanford.edu/)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "forrcaho",
   "author": {
     "name": "Forrest Cahoon"
@@ -101,12 +101,14 @@
     "keybindings": [
       {
         "command": "extension.chuckPlayActiveDocument",
-        "key": "alt+.",
+        "key": "ctrl+.",
+        "mac": "cmd+.",
         "when": "editorLangId == chuck && editorFocus"
       },
       {
         "command": "extension.chuckKillChuckProcess",
-        "key": "alt+`",
+        "key": "ctrl+`",
+        "mac": "cmd+`",
         "when": "editorLangId == chuck && editorFocus"
       }
     ]
@@ -124,12 +126,12 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.7.7",
     "@types/vscode": "^1.94.0",
-    "@typescript-eslint/eslint-plugin": "^8.39.1",
-    "@typescript-eslint/parser": "^8.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
     "@vscode/test-electron": "^2.5.2",
-    "esbuild": "^0.25.9",
-    "eslint": "^9.33.0",
-    "globals": "^16.3.0",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.2"
   }
